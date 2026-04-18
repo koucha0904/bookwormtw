@@ -1,18 +1,29 @@
 # Bookworm TW
 
-> Bookworm TW 是由 Nina Lu 開發維運的繁體中文個人小服務集散地，收錄成語、哺乳室地圖、童書共讀等免費線上工具。所有服務皆免註冊、免付費。
+> Bookworm TW 是 Nina（PM＋工程師媽媽）為女兒「雞蛋糕」做的繁體中文小工具集散地。大部分工具都是在養育雞蛋糕的路上，為她一個一個親手做出來的，做著做著也開放分享給其他家庭。所有服務目前皆免費使用、免註冊，未來可能推出進階付費版本。
+
+## About the creator
+
+- 作者: Nina Lu
+- 身分: PM（Product Manager）與工程師，同時是雞蛋糕的媽媽
+- 「雞蛋糕」: Nina 女兒的小名，網站名稱與風格皆源自於她
 
 ## Services
 
-- [成語介紹](https://idiom.bookwormtw.com/): 查詢繁體中文成語的典故、釋義與用法。
-- [成語遊戲](https://idiom-game.bookwormtw.com/): 以遊戲形式練習與學習繁體中文成語。
-- [全台哺乳室地圖](https://milkmap.bookwormtw.com/): 查找全台各地哺乳室地點、開放時間與設施資訊。
+- [成語介紹](https://idiom.bookwormtw.com/): 把成語典故寫得像故事，希望孩子讀成語時不會覺得硬。
+- [成語遊戲](https://idiom-game.bookwormtw.com/): 把成語做成遊戲，讓孩子邊玩邊記。
+- [全台哺乳室地圖](https://milkmap.bookwormtw.com/): 親餵時找不到哺乳室的困擾，做成這張全台地圖。
 - [童書共讀筆記](https://kidsbook.pages.dev/): 紀錄與孩子共讀童書的心得、重點與親子對話。
+- [台北文化活動](https://taipei-culture.bookwormtw.com/): 整理台北的藝文展演、親子活動與文化展覽資訊。
 
-## About
+## Site info
 
 - 網站名稱: Bookworm TW
 - 語言: 繁體中文 (zh-Hant-TW)
-- 服務地區: 台灣
-- 作者: Nina Lu
+- 服務地區: 台灣（部分服務聚焦台北）
 - 根網域: https://bookwormtw.com/
+- 定位: 個人作品集散地，非商業平台
+
+## Pricing
+
+目前所有服務皆免費。未來可能推出進階付費版本（例如更完整的資料、通知功能、更多城市），基本功能會保持免費。
