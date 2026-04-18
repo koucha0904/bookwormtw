@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bookworm TW — 為雞蛋糕做的小工具｜一個 PM 工程師媽媽 Nina 的小攤</title>
-<meta name="description" content="Bookworm TW 是 Nina（PM＋工程師媽媽）為女兒「雞蛋糕」做的繁體中文小工具集散地。收錄成語介紹、成語遊戲、全台哺乳室地圖、童書共讀筆記、台北文化活動——都是養育雞蛋糕時，為她一個一個做出來的。">
+<title>Bookworm TW｜成語、全台哺乳室地圖、童書共讀、台北文化活動 — 為雞蛋糕做的小工具</title>
+<meta name="description" content="Bookworm TW 收錄五個免費繁體中文小工具：成語介紹與遊戲、全台哺乳室地圖、童書共讀筆記、台北文化活動。由 Nina（PM＋工程師媽媽）為女兒「雞蛋糕」親手做，開放所有家庭使用。">
 <meta name="keywords" content="Bookworm TW, 雞蛋糕, PM, 工程師媽媽, 成語, 成語遊戲, 哺乳室, 全台哺乳室地圖, 童書共讀, 台北文化活動, 親子, 繁體中文, 台灣">
 <meta name="author" content="Nina Lu">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
@@ -12,8 +12,8 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bookworm TW">
-<meta property="og:title" content="Bookworm TW — 為雞蛋糕做的小工具">
-<meta property="og:description" content="一個 PM＋工程師媽媽 Nina，為女兒「雞蛋糕」做的繁體中文小工具。做著做著，也分享給其他家庭。">
+<meta property="og:title" content="Bookworm TW｜成語、哺乳室地圖、童書共讀、台北文化活動">
+<meta property="og:description" content="五個免費繁體中文小工具，由 PM＋工程師媽媽 Nina 為女兒「雞蛋糕」親手做，開放所有家庭使用。">
 <meta property="og:url" content="https://bookwormtw.com/">
 <meta property="og:locale" content="zh_TW">
 
@@ -58,7 +58,7 @@
             "@type": "WebApplication",
             "name": "成語介紹",
             "url": "https://idiom.bookwormtw.com/",
-            "description": "把成語典故講得像故事，希望雞蛋糕長大讀成語時不會覺得硬。",
+            "description": "繁體中文成語的典故、釋義與用法查詢工具，把典故寫得像故事。",
             "applicationCategory": "EducationalApplication",
             "inLanguage": "zh-Hant-TW",
             "isAccessibleForFree": true,
@@ -72,7 +72,7 @@
             "@type": "WebApplication",
             "name": "成語遊戲",
             "url": "https://idiom-game.bookwormtw.com/",
-            "description": "把成語做成遊戲，讓雞蛋糕邊玩邊記。",
+            "description": "以遊戲形式學習與練習繁體中文成語，適合兒童與親子共玩。",
             "applicationCategory": "GameApplication",
             "inLanguage": "zh-Hant-TW",
             "isAccessibleForFree": true,
@@ -86,7 +86,7 @@
             "@type": "WebApplication",
             "name": "全台哺乳室地圖",
             "url": "https://milkmap.bookwormtw.com/",
-            "description": "親餵雞蛋糕的日子常常找不到哺乳室，所以做了這張全台地圖。",
+            "description": "查找全台各地哺乳室地點、開放時間與設施資訊的地圖服務，涵蓋百貨、車站、景點、公共場所。",
             "applicationCategory": "TravelApplication",
             "inLanguage": "zh-Hant-TW",
             "isAccessibleForFree": true,
@@ -101,7 +101,7 @@
             "@type": "WebApplication",
             "name": "童書共讀筆記",
             "url": "https://kidsbook.pages.dev/",
-            "description": "跟雞蛋糕一起讀過的每一本書、每一段對話，好好記下來。",
+            "description": "記錄親子共讀童書的心得、重點、對話與延伸討論，適合家長留存共讀歷程。",
             "applicationCategory": "EducationalApplication",
             "inLanguage": "zh-Hant-TW",
             "isAccessibleForFree": true,
@@ -115,7 +115,7 @@
             "@type": "WebApplication",
             "name": "台北文化活動",
             "url": "https://taipei-culture.bookwormtw.com/",
-            "description": "想帶雞蛋糕週末看看世界，整理台北各類藝文展演與親子活動。",
+            "description": "彙整台北各類藝文展覽、表演、市集與親子活動資訊，方便家庭規劃週末行程。",
             "applicationCategory": "LifestyleApplication",
             "inLanguage": "zh-Hant-TW",
             "isAccessibleForFree": true,
@@ -282,8 +282,15 @@
     font-weight: 600;
     color: var(--muted);
     letter-spacing: 0.08em;
-    margin: 0 0 1.25rem;
+    margin: 0 0 0.4rem;
     text-align: center;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin: 0 0 1.5rem;
+    letter-spacing: 0.02em;
   }
   .grid {
     display: grid;
@@ -321,11 +328,19 @@
     margin: 0 0 0.5rem;
     font-weight: 600;
   }
-  .card .why {
+  .card .what {
     color: var(--fg);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.4rem;
     font-size: 0.95rem;
+    line-height: 1.55;
+    font-weight: 500;
+  }
+  .card .why {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.88rem;
     line-height: 1.6;
+    font-style: italic;
   }
   .card .host {
     display: block;
@@ -391,12 +406,14 @@
 
   <section aria-labelledby="services-title">
     <h2 id="services-title" class="section-title">為雞蛋糕做的五個小工具</h2>
+    <p class="section-sub">成語介紹 · 成語遊戲 · 全台哺乳室地圖 · 童書共讀筆記 · 台北文化活動</p>
     <ul class="grid">
       <li>
         <a class="card" href="https://idiom.bookwormtw.com/">
           <span class="emoji" aria-hidden="true">🀄</span>
           <h3>成語介紹</h3>
-          <p class="why">希望雞蛋糕以後讀成語的時候，不會覺得字典太硬。所以把典故寫得像故事。</p>
+          <p class="what">查詢繁體中文成語的典故、釋義與用法。</p>
+          <p class="why">希望雞蛋糕以後讀成語時，不會覺得字典太硬。</p>
           <span class="host">idiom.bookwormtw.com</span>
         </a>
       </li>
@@ -404,7 +421,8 @@
         <a class="card" href="https://idiom-game.bookwormtw.com/">
           <span class="emoji" aria-hidden="true">🎮</span>
           <h3>成語遊戲</h3>
-          <p class="why">把成語做成遊戲，讓雞蛋糕邊玩邊記。也歡迎你的孩子來玩。</p>
+          <p class="what">以遊戲形式練習與學習繁體中文成語，適合兒童與親子共玩。</p>
+          <p class="why">把成語做成遊戲，讓雞蛋糕邊玩邊記。</p>
           <span class="host">idiom-game.bookwormtw.com</span>
         </a>
       </li>
@@ -412,7 +430,8 @@
         <a class="card" href="https://milkmap.bookwormtw.com/">
           <span class="emoji" aria-hidden="true">🍼</span>
           <h3>全台哺乳室地圖</h3>
-          <p class="why">親餵雞蛋糕的日子，常常找不到一個能坐下來的地方。所以做了這張地圖。</p>
+          <p class="what">查找全台各地哺乳室地點、開放時間與設施資訊，涵蓋百貨、車站、景點與公共場所。</p>
+          <p class="why">親餵雞蛋糕的日子，常找不到能坐下來的地方。</p>
           <span class="host">milkmap.bookwormtw.com</span>
         </a>
       </li>
@@ -420,7 +439,8 @@
         <a class="card" href="https://kidsbook.pages.dev/">
           <span class="emoji" aria-hidden="true">📖</span>
           <h3>童書共讀筆記</h3>
-          <p class="why">跟雞蛋糕一起讀過的每一本書、每一段她講過的話，想好好記下來。</p>
+          <p class="what">記錄親子共讀童書的心得、重點、親子對話與延伸討論。</p>
+          <p class="why">跟雞蛋糕一起讀過的每一本書，想好好記下來。</p>
           <span class="host">kidsbook.pages.dev</span>
         </a>
       </li>
@@ -428,7 +448,8 @@
         <a class="card" href="https://taipei-culture.bookwormtw.com/">
           <span class="emoji" aria-hidden="true">🎨</span>
           <h3>台北文化活動</h3>
-          <p class="why">想帶雞蛋糕週末看看世界，整理了台北的展覽、演出與親子活動。</p>
+          <p class="what">彙整台北各類藝文展覽、表演、市集與親子活動，方便家庭規劃週末行程。</p>
+          <p class="why">想帶雞蛋糕週末看看世界。</p>
           <span class="host">taipei-culture.bookwormtw.com</span>
         </a>
       </li>
