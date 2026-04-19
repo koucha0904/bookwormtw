@@ -7,7 +7,7 @@
 <meta name="description" content="Bookworm TW 收錄五個免費繁體中文小工具：成語介紹、成語遊戲、全台哺乳室地圖、童書共讀筆記、台北文化活動。由 Nina（PM＋工程師媽媽）為女兒「雞蛋糕」親手做，開放所有家庭使用。">
 <meta name="keywords" content="Bookworm TW, 雞蛋糕, 成語, 成語遊戲, 哺乳室, 全台哺乳室地圖, 童書共讀, 台北文化活動, 親子, 繁體中文, 台灣">
 <meta name="author" content="Nina Lu">
-<meta name="theme-color" content="#fdf6e9">
+<meta name="theme-color" content="#fdf8ef">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
 <link rel="canonical" href="https://bookwormtw.com/">
 
@@ -23,6 +23,10 @@
 <meta name="twitter:description" content="五個免費繁體中文小工具，由 PM＋工程師媽媽 Nina 為女兒「雞蛋糕」親手做。">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -168,645 +172,1012 @@
 </script>
 
 <style>
-  /* ============ Reset & Base ============ */
-  *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; padding: 0; }
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
+/* ── Tokens ── */
+:root {
+  --bg:          #fdf8ef;
+  --paper:       #fffcf5;
+  --ink:         #1c1208;
+  --ink-mid:     #4a3520;
+  --ink-soft:    #7a6248;
+  --ink-faint:   #b09a80;
+  --gold:        #b8721a;
+  --gold-lt:     #e8a84a;
+  --gold-bg:     #f7e8cc;
+  --gold-bg-lt:  #fdf3e0;
+  --sage:        #5a7a5c;
+  --border:      #e8d8be;
+  --border-lt:   #f2e8d6;
+  --shadow:      rgba(60,30,8,.10);
+  --r:           12px;
+  --r-lg:        20px;
+
+  --serif-en:    'Playfair Display', 'Noto Serif TC', Georgia, serif;
+  --serif-zh:    'Noto Serif TC', 'Playfair Display', Georgia, serif;
+  --sans:        'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:        ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    /* Warm, bookish palette — 雞蛋糕 golden */
-    --bg: #fbf4e4;
-    --paper: #fffaf0;
-    --ink: #2a1e14;
-    --ink-soft: #5c4a3a;
-    --ink-faint: #8c7a68;
-    --border: #e8d8ba;
-    --border-soft: #f0e4cc;
-    --gold: #c47a28;
-    --gold-soft: #f5e4c8;
-    --gold-ink: #8a5416;
-    --cream-glow: #faedc8;
+    --bg:         #141009;
+    --paper:      #1e1610;
+    --ink:        #f5ead8;
+    --ink-mid:    #c8b090;
+    --ink-soft:   #9a8060;
+    --ink-faint:  #6a5840;
+    --gold:       #e8a84a;
+    --gold-lt:    #f5c870;
+    --gold-bg:    #2a1e0a;
+    --gold-bg-lt: #241a08;
+    --border:     #2e2218;
+    --border-lt:  #261c12;
+    --shadow:     rgba(0,0,0,.30);
+    --sage:       #7ab87e;
+  }
+}
 
-    /* Scale */
-    --radius: 14px;
-    --radius-lg: 20px;
+/* ── Base ── */
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
 
-    /* Typography */
-    --font-serif: "Iowan Old Style", "Noto Serif TC", "Source Han Serif TC", "Songti TC", Georgia, "PMingLiU", serif;
-    --font-sans: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Helvetica Neue", sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  }
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .5;
+}
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1a1510;
-      --paper: #231c14;
-      --ink: #f5ecdc;
-      --ink-soft: #c4b39b;
-      --ink-faint: #8f7d66;
-      --border: #3a2d1e;
-      --border-soft: #2d2217;
-      --gold: #e8a869;
-      --gold-soft: #3a2a18;
-      --gold-ink: #f2be84;
-      --cream-glow: #2f2415;
-    }
-  }
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-  body {
-    font-family: var(--font-sans);
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
 
-  main {
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: clamp(3rem, 8vw, 5.5rem) 1.5rem 3rem;
-    flex: 1;
-  }
+/* ── Layout wrapper ── */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
+}
 
-  a { color: var(--gold-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  a:hover { color: var(--gold); }
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0.9rem 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-lt);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.nav-logo {
+  font-family: var(--serif-en);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+.nav-links a {
+  color: var(--ink-soft);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--gold); text-decoration: none; }
+@media (max-width: 600px) { .nav-links { display: none; } }
 
-  /* ============ Kicker (small caps label) ============ */
-  .kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--gold);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .kicker::before {
-    content: "";
-    width: 20px;
-    height: 1px;
-    background: var(--gold);
-  }
+/* ── HERO ── */
+.hero {
+  padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 7vw, 6rem);
+  position: relative;
+}
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.75rem;
+}
+.hero-label::before, .hero-label::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .6;
+}
+.hero-title {
+  font-family: var(--serif-en);
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  position: relative;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-subtitle {
+  font-family: var(--serif-zh);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  letter-spacing: 0.12em;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--ink-mid);
+  background: var(--paper);
+  transition: border-color .2s, background .2s, color .2s;
+}
+.pill:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-bg-lt);
+  text-decoration: none;
+}
+.hero-lede {
+  max-width: 38em;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.hero-lede strong {
+  color: var(--ink);
+  font-weight: 500;
+}
 
-  /* ============ Hero ============ */
-  .hero {
-    text-align: center;
-    margin-bottom: clamp(3rem, 6vw, 4.5rem);
-  }
-  .hero .kicker {
-    justify-content: center;
-    margin-bottom: 1.25rem;
-  }
-  .hero .kicker::after {
-    content: "";
-    width: 20px;
-    height: 1px;
-    background: var(--gold);
-  }
-  .hero h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 8vw, 4.5rem);
-    font-weight: 500;
-    margin: 0 0 0.5rem;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    color: var(--ink);
-  }
-  .hero .underline {
-    display: block;
-    margin: 0 auto 1.5rem;
-    color: var(--gold);
-    opacity: 0.75;
-  }
-  .hero .keywords {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--ink-soft);
-    margin: 0 0 1rem;
-  }
-  .hero .lede {
-    max-width: 32em;
-    margin: 0 auto;
-    color: var(--ink-soft);
-    font-size: 1rem;
-  }
+/* Large decorative number */
+.hero-deco {
+  position: absolute;
+  right: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--serif-en);
+  font-size: clamp(12rem, 22vw, 20rem);
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  opacity: .4;
+}
+@media (max-width: 768px) { .hero-deco { display: none; } }
 
-  /* ============ Letter ============ */
-  .letter {
-    margin-bottom: clamp(3rem, 6vw, 4.5rem);
-  }
-  .letter-card {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: clamp(1.75rem, 4vw, 2.5rem);
-    position: relative;
-    box-shadow:
-      0 1px 0 var(--border-soft),
-      0 20px 40px -28px rgba(90, 60, 20, 0.18);
-  }
-  .letter-card::before {
-    content: "";
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-3deg);
-    width: 68px;
-    height: 22px;
-    background: var(--gold-soft);
-    border-radius: 4px;
-    opacity: 0.95;
-  }
-  .letter-card h2 {
-    font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 500;
-    margin: 0 0 1rem;
-    color: var(--ink);
-  }
-  .letter-card p {
-    margin: 0 0 0.85rem;
-    color: var(--ink);
-    font-size: 1rem;
-  }
-  .letter-card p:last-of-type { margin-bottom: 0; }
-  .letter-card .name {
-    font-weight: 600;
-    color: var(--gold-ink);
-    background: linear-gradient(180deg, transparent 62%, var(--cream-glow) 62%);
-    padding: 0 2px;
-  }
-  .letter-card .signoff {
-    margin-top: 1.25rem;
-    color: var(--ink-faint);
-    font-style: italic;
-    font-size: 0.92rem;
-    font-family: var(--font-serif);
-  }
-  .pricing-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: 1.25rem;
-    padding: 0.4rem 0.9rem;
-    background: var(--gold-soft);
-    color: var(--gold-ink);
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-  }
-  .pricing-tag::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-  }
+/* ── DIVIDER ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: clamp(3rem, 6vw, 5rem) 0;
+  color: var(--gold);
+  opacity: .5;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.divider-glyph {
+  font-family: var(--serif-en);
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+}
 
-  /* ============ Ornament divider ============ */
-  .ornament {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin: clamp(3rem, 6vw, 4.5rem) 0;
-    color: var(--ink-faint);
-    font-family: var(--font-serif);
-  }
-  .ornament::before, .ornament::after {
-    content: "";
-    flex: 0 1 60px;
-    height: 1px;
-    background: var(--border);
-  }
-  .ornament span {
-    font-size: 1.2rem;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    opacity: 0.6;
-  }
+/* ── LETTER ── */
+.letter-wrap { position: relative; }
+.letter-tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 70px;
+  height: 24px;
+  background: var(--gold-bg);
+  border-radius: 3px;
+  opacity: .85;
+}
+.letter-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow:
+    0 1px 0 var(--border-lt),
+    0 8px 40px -12px var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+/* ruled lines */
+.letter-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent,
+    transparent calc(1.8rem * 1.8 - 1px),
+    var(--border-lt) calc(1.8rem * 1.8)
+  );
+  background-position: 0 3.6rem;
+  pointer-events: none;
+  opacity: .5;
+}
+.letter-header {
+  font-family: var(--serif-en);
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.letter-body p {
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  line-height: 1.85;
+  position: relative;
+  z-index: 1;
+}
+.letter-body p:last-of-type { margin-bottom: 0; }
+.name-highlight {
+  color: var(--gold);
+  font-weight: 500;
+  border-bottom: 1.5px solid var(--gold-lt);
+  padding-bottom: 1px;
+}
+.letter-sign {
+  margin-top: 1.75rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+.letter-sig {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+.letter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: var(--gold-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+.letter-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sage);
+}
 
-  /* ============ Section head ============ */
-  .section-head {
-    text-align: center;
-    margin-bottom: 2.5rem;
-  }
-  .section-head .kicker {
-    justify-content: center;
-    margin-bottom: 0.9rem;
-  }
-  .section-head .kicker::after {
-    content: "";
-    width: 20px;
-    height: 1px;
-    background: var(--gold);
-  }
-  .section-head h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(1.65rem, 4vw, 2.1rem);
-    font-weight: 500;
-    margin: 0 0 0.6rem;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-  }
-  .section-head .section-desc {
-    max-width: 30em;
-    margin: 0 auto;
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-  }
+/* ── SERVICES SECTION ── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .6;
+}
+.section-title {
+  font-family: var(--serif-zh);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+.section-desc {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  max-width: 38em;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
 
-  /* ============ Services ============ */
-  .services-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1rem;
-  }
-  .service {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.75rem 1.75rem 1.5rem;
-    text-decoration: none;
-    color: inherit;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto 1fr auto;
-    gap: 0 1.25rem;
-    align-items: start;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    position: relative;
-  }
-  .service:hover, .service:focus-visible {
-    transform: translateY(-2px);
-    border-color: var(--gold);
-    box-shadow: 0 10px 30px -14px rgba(196, 122, 40, 0.25);
-    background: var(--paper);
-    outline: none;
-  }
-  .service .num {
-    grid-row: 1 / 4;
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    color: var(--gold);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    padding-top: 0.3rem;
-    min-width: 2.2rem;
-    border-right: 1px solid var(--border-soft);
-    padding-right: 1rem;
-    text-align: center;
-  }
-  .service .head {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.4rem;
-  }
-  .service h3 {
-    font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 500;
-    margin: 0;
-    color: var(--ink);
-  }
-  .service .emoji {
-    font-size: 1.4rem;
-    line-height: 1;
-  }
-  .service .what {
-    margin: 0 0 0.35rem;
-    color: var(--ink);
-    font-size: 0.98rem;
-    line-height: 1.65;
-  }
-  .service .why {
-    margin: 0;
-    color: var(--ink-faint);
-    font-size: 0.88rem;
-    font-style: italic;
-    font-family: var(--font-serif);
-    line-height: 1.6;
-  }
-  .service .meta {
-    grid-column: 2 / 3;
-    margin-top: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--gold-ink);
-    letter-spacing: -0.01em;
-  }
-  .service .arrow {
-    grid-row: 1 / 4;
-    align-self: center;
-    color: var(--ink-faint);
-    font-size: 1.4rem;
-    transition: transform 0.2s ease, color 0.2s ease;
-    line-height: 1;
-  }
-  .service:hover .arrow, .service:focus-visible .arrow {
-    transform: translateX(4px);
-    color: var(--gold);
-  }
+/* Services grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+@media (max-width: 680px) {
+  .services-grid { grid-template-columns: 1fr; }
+}
+/* Last item spans full width when count is odd */
+.services-grid li:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
 
-  @media (max-width: 540px) {
-    .service {
-      grid-template-columns: auto 1fr;
-      gap: 0.3rem 1rem;
-    }
-    .service .num {
-      grid-row: 1 / 2;
-      border-right: none;
-      padding: 0;
-      text-align: left;
-      font-size: 1rem;
-      min-width: 0;
-      color: var(--gold);
-    }
-    .service .arrow {
-      grid-row: 1 / 2;
-      grid-column: 2 / 3;
-      justify-self: end;
-    }
-    .service .head, .service .what, .service .why, .service .meta {
-      grid-column: 1 / 3;
-    }
-  }
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.75rem 2rem;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  min-height: 180px;
+}
+.svc-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 36px -10px var(--shadow);
+  text-decoration: none;
+}
+/* Big number watermark */
+.svc-num {
+  position: absolute;
+  top: -0.2rem;
+  right: 1rem;
+  font-family: var(--serif-en);
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  transition: color .25s;
+}
+.svc-card:hover .svc-num { color: var(--gold-bg); }
+.svc-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+  position: relative;
+  z-index: 1;
+}
+.svc-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.svc-name {
+  font-family: var(--serif-zh);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.svc-what {
+  font-size: 0.9rem;
+  color: var(--ink-mid);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.svc-why {
+  font-family: var(--serif-zh);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  position: relative;
+  z-index: 1;
+}
+.svc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+.svc-url {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  word-break: break-all;
+}
+.svc-arrow {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+  transition: border-color .2s, color .2s, background .2s, transform .2s;
+  flex-shrink: 0;
+}
+.svc-card:hover .svc-arrow {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-bg);
+  transform: translateX(2px);
+}
 
-  /* ============ About strip ============ */
-  .about {
-    margin-top: clamp(3rem, 6vw, 4.5rem);
-    padding: 2rem;
-    background: var(--gold-soft);
-    border-radius: var(--radius);
-    text-align: center;
-  }
-  .about h2 {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin: 0 0 0.75rem;
-    color: var(--gold-ink);
-  }
-  .about p {
-    margin: 0 auto;
-    max-width: 36em;
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-  }
+/* ── ABOUT ── */
+.about-strip {
+  background: var(--gold-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: clamp(2rem, 5vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .about-strip { grid-template-columns: 1fr; }
+  .about-flourish { display: none; }
+}
+.about-body h2 {
+  font-family: var(--serif-zh);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.about-body p {
+  color: var(--ink-mid);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+.about-flourish {
+  font-family: var(--serif-en);
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: .15;
+  line-height: 1;
+  font-weight: 700;
+  font-style: italic;
+  user-select: none;
+}
 
-  /* ============ FAQ ============ */
-  .faq {
-    margin-top: clamp(3rem, 6vw, 4.5rem);
-  }
-  .faq details {
-    border-top: 1px solid var(--border);
-    padding: 1.2rem 0.25rem;
-    transition: background 0.15s ease;
-  }
-  .faq details:last-of-type {
-    border-bottom: 1px solid var(--border);
-  }
-  .faq details[open] {
-    background: linear-gradient(180deg, transparent, var(--border-soft) 120%);
-  }
-  .faq summary {
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
-    color: var(--ink);
-  }
-  .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::before {
-    content: "+";
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: var(--gold-soft);
-    color: var(--gold-ink);
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-  .faq details[open] summary::before {
-    content: "−";
-    background: var(--gold);
-    color: white;
-  }
-  .faq p {
-    margin: 0.9rem 0 0.25rem 2.1rem;
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-    line-height: 1.7;
-  }
+/* ── FAQ ── */
+.faq-list { border-top: 1px solid var(--border); }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item details summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.3rem 0.25rem;
+  font-family: var(--serif-zh);
+  font-size: 1.05rem;
+  color: var(--ink);
+  transition: color .2s;
+}
+.faq-item details summary::-webkit-details-marker { display: none; }
+.faq-item details summary:hover { color: var(--gold); }
+.faq-toggle {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+  transition: all .2s;
+}
+.faq-item details[open] summary .faq-toggle {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: white;
+  transform: rotate(45deg);
+}
+.faq-item details[open] summary { color: var(--gold); }
+.faq-answer {
+  padding: 0 0.25rem 1.5rem 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 42em;
+}
 
-  /* ============ Footer ============ */
-  footer {
-    text-align: center;
-    padding: 3rem 1.5rem 2.5rem;
-    color: var(--ink-faint);
-    font-size: 0.85rem;
-    line-height: 1.8;
-    border-top: 1px solid var(--border-soft);
-    margin-top: 3rem;
-  }
-  footer .tagline {
-    display: block;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--ink-soft);
-    margin-bottom: 0.5rem;
-  }
-  footer .meta-line {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--ink-faint);
-  }
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border-lt);
+  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(3rem, 7vw, 6rem);
+}
+.footer-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  font-family: var(--serif-en);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.footer-tagline {
+  font-family: var(--serif-zh);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.footer-right { text-align: right; }
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  line-height: 1.9;
+}
+@media (max-width: 540px) {
+  .footer-inner { flex-direction: column; }
+  .footer-right { text-align: left; }
+}
 
-  /* ============ Accessibility ============ */
-  :focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
+/* ── TWEAKS PANEL (design-mode only, hidden in production) ── */
+#tweaks-panel {
+  display: none;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9000;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: 0 8px 48px -8px var(--shadow);
+  padding: 1.5rem;
+  width: 240px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+#tweaks-panel.open { display: block; }
+.tweaks-title {
+  font-family: var(--serif-zh);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+.tweak-row { margin-bottom: 1rem; }
+.tweak-row label {
+  display: block;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+.tweak-options { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.tweak-btn {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.75rem;
+  color: var(--ink-mid);
+  cursor: pointer;
+  transition: all .15s;
+  font-family: var(--sans);
+}
+.tweak-btn:hover, .tweak-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-bg-lt);
+}
+
+/* ── Accessibility ── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
 </style>
 </head>
 <body>
 
-<main>
-  <!-- ============ HERO ============ -->
-  <header class="hero">
-    <p class="kicker">by Nina · for 雞蛋糕</p>
-    <h1>Bookworm TW</h1>
-    <svg class="underline" width="220" height="10" viewBox="0 0 220 10" fill="none" aria-hidden="true">
-      <path d="M3 6 C 50 2, 110 9, 160 4 S 210 7, 217 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-    </svg>
-    <p class="keywords">成語 · 哺乳室 · 童書共讀 · 台北文化</p>
-    <p class="lede">一位 PM 工程師媽媽，為女兒「雞蛋糕」親手做的五個免費繁體中文小工具。做著做著，也分享給你的孩子。</p>
+<!-- NAV -->
+<nav>
+  <div class="page nav-inner">
+    <a class="nav-logo" href="/">📚 <span>Bookworm</span> TW</a>
+    <ul class="nav-links">
+      <li><a href="#services">小工具</a></li>
+      <li><a href="#about">關於 Nina</a></li>
+      <li><a href="#faq">常見問題</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero reveal">
+    <p class="hero-label">by Nina · for 雞蛋糕</p>
+    <h1 class="hero-title">Book<em>worm</em><br>TW</h1>
+    <p class="hero-subtitle">成語 · 哺乳室 · 童書共讀 · 台北文化</p>
+    <div class="hero-pills">
+      <a class="pill" href="https://idiom.bookwormtw.com/">🀄 成語介紹</a>
+      <a class="pill" href="https://idiom-game.bookwormtw.com/">🎮 成語遊戲</a>
+      <a class="pill" href="https://milkmap.bookwormtw.com/">🍼 全台哺乳室地圖</a>
+      <a class="pill" href="https://kidsbook.pages.dev/">📖 童書共讀筆記</a>
+      <a class="pill" href="https://taipei-culture.bookwormtw.com/">🎨 台北文化活動</a>
+    </div>
+    <p class="hero-lede">一位 PM 工程師媽媽，為女兒 <strong>「雞蛋糕」</strong> 親手做的五個免費繁體中文小工具。做著做著，也分享給你的孩子。</p>
+    <div class="hero-deco" aria-hidden="true">5</div>
   </header>
 
-  <!-- ============ LETTER ============ -->
-  <section class="letter" aria-label="關於作者與這個網站">
-    <article class="letter-card">
-      <h2>一封關於這個小站的信</h2>
-      <p>你好，我是 Nina。</p>
-      <p>我女兒小名叫 <span class="name">雞蛋糕</span>。我是一個 PM，也是工程師。</p>
-      <p>這裡的每一個小工具，幾乎都是我在養育雞蛋糕的路上，為她一個一個親手做的——想讓她讀成語時覺得有趣、陪她讀繪本、出門時找得到哺乳室、週末帶她看看台北。</p>
-      <p>做著做著，發現別的爸媽與孩子可能也會用得上，所以放在這裡分享。希望也能陪到你的孩子。</p>
-      <p class="signoff">— Nina, 在 product spec 與親子繪本之間</p>
-      <span class="pricing-tag">目前免費使用 · 未來可能有付費進階版</span>
-    </article>
+  <!-- LETTER -->
+  <section class="reveal" aria-label="關於作者">
+    <div class="letter-wrap">
+      <div class="letter-tape" aria-hidden="true"></div>
+      <article class="letter-card">
+        <h2 class="letter-header">一封關於這個小站的信</h2>
+        <div class="letter-body">
+          <p>你好，我是 Nina。</p>
+          <p>我女兒小名叫 <span class="name-highlight">雞蛋糕</span>。我是一個 PM，也是工程師。</p>
+          <p>這裡的每一個小工具，幾乎都是我在養育雞蛋糕的路上，為她一個一個親手做的——想讓她讀成語時覺得有趣、陪她讀繪本、出門時找得到哺乳室、週末帶她看看台北。</p>
+          <p>做著做著，發現別的爸媽與孩子可能也會用得上，所以放在這裡分享。希望也能陪到你的孩子。</p>
+        </div>
+        <div class="letter-sign">
+          <span class="letter-sig">— Nina, 在 product spec 與親子繪本之間</span>
+          <span class="letter-badge">目前免費使用 · 不需註冊</span>
+        </div>
+      </article>
+    </div>
   </section>
 
-  <!-- Ornament -->
-  <div class="ornament" aria-hidden="true"><span>· · ·</span></div>
+  <div class="divider" aria-hidden="true"><span class="divider-glyph">· · ·</span></div>
 
-  <!-- ============ SERVICES ============ -->
-  <section aria-labelledby="services-h">
-    <div class="section-head">
-      <p class="kicker">Tools · 小工具</p>
-      <h2 id="services-h">為雞蛋糕做的五個小工具</h2>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="reveal">
+      <p class="section-label">Tools · 小工具</p>
+      <h2 class="section-title">為雞蛋糕做的五個小工具</h2>
       <p class="section-desc">成語介紹、成語遊戲、全台哺乳室地圖、童書共讀筆記、台北文化活動——免費使用、無需註冊。</p>
     </div>
 
-    <ol class="services-list">
+    <ol class="services-grid reveal">
       <li>
-        <a class="service" href="https://idiom.bookwormtw.com/">
-          <span class="num" aria-hidden="true">01</span>
-          <div class="head">
-            <span class="emoji" aria-hidden="true">🀄</span>
-            <h3>成語介紹</h3>
+        <a class="svc-card" href="https://idiom.bookwormtw.com/">
+          <span class="svc-num" aria-hidden="true">01</span>
+          <div class="svc-top">
+            <span class="svc-icon">🀄</span>
+            <h3 class="svc-name">成語介紹</h3>
           </div>
-          <p class="what">查詢繁體中文成語的典故、釋義與用法。</p>
-          <p class="why">希望雞蛋糕以後讀成語時，不會覺得字典太硬。</p>
-          <span class="meta">idiom.bookwormtw.com</span>
-          <span class="arrow" aria-hidden="true">→</span>
+          <p class="svc-what">查詢繁體中文成語的典故、釋義與用法，把典故寫得像故事。</p>
+          <p class="svc-why">希望雞蛋糕以後讀成語時，不會覺得字典太硬。</p>
+          <div class="svc-footer">
+            <span class="svc-url">idiom.bookwormtw.com</span>
+            <span class="svc-arrow">→</span>
+          </div>
         </a>
       </li>
-
       <li>
-        <a class="service" href="https://idiom-game.bookwormtw.com/">
-          <span class="num" aria-hidden="true">02</span>
-          <div class="head">
-            <span class="emoji" aria-hidden="true">🎮</span>
-            <h3>成語遊戲</h3>
+        <a class="svc-card" href="https://idiom-game.bookwormtw.com/">
+          <span class="svc-num" aria-hidden="true">02</span>
+          <div class="svc-top">
+            <span class="svc-icon">🎮</span>
+            <h3 class="svc-name">成語遊戲</h3>
           </div>
-          <p class="what">以遊戲形式練習與學習成語，適合兒童與親子共玩。</p>
-          <p class="why">把成語做成遊戲，讓雞蛋糕邊玩邊記。</p>
-          <span class="meta">idiom-game.bookwormtw.com</span>
-          <span class="arrow" aria-hidden="true">→</span>
+          <p class="svc-what">以遊戲形式練習與學習成語，適合兒童與親子共玩。</p>
+          <p class="svc-why">把成語做成遊戲，讓雞蛋糕邊玩邊記。</p>
+          <div class="svc-footer">
+            <span class="svc-url">idiom-game.bookwormtw.com</span>
+            <span class="svc-arrow">→</span>
+          </div>
         </a>
       </li>
-
       <li>
-        <a class="service" href="https://milkmap.bookwormtw.com/">
-          <span class="num" aria-hidden="true">03</span>
-          <div class="head">
-            <span class="emoji" aria-hidden="true">🍼</span>
-            <h3>全台哺乳室地圖</h3>
+        <a class="svc-card" href="https://milkmap.bookwormtw.com/">
+          <span class="svc-num" aria-hidden="true">03</span>
+          <div class="svc-top">
+            <span class="svc-icon">🍼</span>
+            <h3 class="svc-name">全台哺乳室地圖</h3>
           </div>
-          <p class="what">查找全台哺乳室地點、開放時間與設施資訊，涵蓋百貨、車站、景點與公共場所。</p>
-          <p class="why">親餵雞蛋糕的日子，常找不到能坐下來的地方。</p>
-          <span class="meta">milkmap.bookwormtw.com</span>
-          <span class="arrow" aria-hidden="true">→</span>
+          <p class="svc-what">查找全台哺乳室地點、開放時間與設施資訊，涵蓋百貨、車站、景點與公共場所。</p>
+          <p class="svc-why">親餵雞蛋糕的日子，常找不到能坐下來的地方。</p>
+          <div class="svc-footer">
+            <span class="svc-url">milkmap.bookwormtw.com</span>
+            <span class="svc-arrow">→</span>
+          </div>
         </a>
       </li>
-
       <li>
-        <a class="service" href="https://kidsbook.pages.dev/">
-          <span class="num" aria-hidden="true">04</span>
-          <div class="head">
-            <span class="emoji" aria-hidden="true">📖</span>
-            <h3>童書共讀筆記</h3>
+        <a class="svc-card" href="https://kidsbook.pages.dev/">
+          <span class="svc-num" aria-hidden="true">04</span>
+          <div class="svc-top">
+            <span class="svc-icon">📖</span>
+            <h3 class="svc-name">童書共讀筆記</h3>
           </div>
-          <p class="what">記錄親子共讀童書的心得、重點、對話與延伸討論。</p>
-          <p class="why">跟雞蛋糕一起讀過的每一本書，想好好記下來。</p>
-          <span class="meta">kidsbook.pages.dev</span>
-          <span class="arrow" aria-hidden="true">→</span>
+          <p class="svc-what">記錄親子共讀童書的心得、重點、對話與延伸討論。</p>
+          <p class="svc-why">跟雞蛋糕一起讀過的每一本書，想好好記下來。</p>
+          <div class="svc-footer">
+            <span class="svc-url">kidsbook.pages.dev</span>
+            <span class="svc-arrow">→</span>
+          </div>
         </a>
       </li>
-
       <li>
-        <a class="service" href="https://taipei-culture.bookwormtw.com/">
-          <span class="num" aria-hidden="true">05</span>
-          <div class="head">
-            <span class="emoji" aria-hidden="true">🎨</span>
-            <h3>台北文化活動</h3>
+        <a class="svc-card" href="https://taipei-culture.bookwormtw.com/">
+          <span class="svc-num" aria-hidden="true">05</span>
+          <div class="svc-top">
+            <span class="svc-icon">🎨</span>
+            <h3 class="svc-name">台北文化活動</h3>
           </div>
-          <p class="what">彙整台北各類藝文展覽、表演、市集與親子活動，方便家庭規劃週末行程。</p>
-          <p class="why">想帶雞蛋糕週末看看世界。</p>
-          <span class="meta">taipei-culture.bookwormtw.com</span>
-          <span class="arrow" aria-hidden="true">→</span>
+          <p class="svc-what">彙整台北各類藝文展覽、表演、市集與親子活動，方便家庭規劃週末行程。</p>
+          <p class="svc-why">想帶雞蛋糕週末看看世界。</p>
+          <div class="svc-footer">
+            <span class="svc-url">taipei-culture.bookwormtw.com</span>
+            <span class="svc-arrow">→</span>
+          </div>
         </a>
       </li>
     </ol>
   </section>
 
-  <!-- ============ ABOUT ============ -->
-  <aside class="about" aria-labelledby="about-h">
-    <h2 id="about-h">關於 Nina</h2>
-    <p>一個 PM（Product Manager）與工程師，同時是雞蛋糕的媽媽。喜歡把生活裡遇到的小麻煩，親手做成小工具，並開放給其他家庭使用。Bookworm TW 是這些工具的集散地。</p>
-  </aside>
+  <div class="divider" aria-hidden="true"><span class="divider-glyph">· · ·</span></div>
 
-  <!-- Ornament -->
-  <div class="ornament" aria-hidden="true"><span>· · ·</span></div>
-
-  <!-- ============ FAQ ============ -->
-  <section class="faq" aria-labelledby="faq-h">
-    <div class="section-head">
-      <p class="kicker">FAQ · 常問的幾件事</p>
-      <h2 id="faq-h">如果你想問……</h2>
-    </div>
-    <details>
-      <summary>「雞蛋糕」是誰？</summary>
-      <p>是我女兒的小名。圓圓的、暖暖的、很可愛，所以叫雞蛋糕 🫶 這個網站上的大部分工具，都是在養育她的路上，一個一個為她做的。</p>
-    </details>
-    <details>
-      <summary>Bookworm TW 是什麼？</summary>
-      <p>一個 PM＋工程師媽媽 Nina，為女兒雞蛋糕做的繁體中文小工具集散地。做著做著發現，其他爸媽、其他孩子可能也會需要，所以就放在這裡分享。</p>
-    </details>
-    <details>
-      <summary>這些服務要收費嗎？</summary>
-      <p>目前全部免費使用、不用註冊。未來某些服務可能會有進階付費版本（例如更完整的資料、通知功能、更多城市支援），讓我能持續維護。基本功能會保持免費。</p>
-    </details>
-    <details>
-      <summary>有建議、想回饋、或想跟雞蛋糕的媽媽聊聊？</summary>
-      <p>歡迎寫信給我，或在各個服務的 GitHub repo 開 issue。一個人做的小攤，每一個回饋都非常珍貴。</p>
-    </details>
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <aside class="about-strip">
+      <div class="about-body">
+        <h2>關於 Nina</h2>
+        <p>一個 PM（Product Manager）與工程師，同時是雞蛋糕的媽媽。喜歡把生活裡遇到的小麻煩，親手做成小工具，並開放給其他家庭使用。Bookworm TW 是這些工具的集散地。</p>
+      </div>
+      <div class="about-flourish" aria-hidden="true">N</div>
+    </aside>
   </section>
-</main>
 
+  <div class="divider" aria-hidden="true"><span class="divider-glyph">· · ·</span></div>
+
+  <!-- FAQ -->
+  <section id="faq" class="reveal">
+    <p class="section-label">FAQ · 常問的幾件事</p>
+    <h2 class="section-title">如果你想問……</h2>
+
+    <div class="faq-list" style="margin-top:2rem">
+      <div class="faq-item">
+        <details>
+          <summary>「雞蛋糕」是誰？<span class="faq-toggle">+</span></summary>
+          <p class="faq-answer">是我女兒的小名。圓圓的、暖暖的、很可愛，所以叫雞蛋糕。這個網站上的大部分工具，都是在養育她的路上，一個一個為她做的。</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>Bookworm TW 是什麼？<span class="faq-toggle">+</span></summary>
+          <p class="faq-answer">一個 PM＋工程師媽媽 Nina，為女兒雞蛋糕做的繁體中文小工具集散地。做著做著發現，其他爸媽、其他孩子可能也會需要，所以就放在這裡分享。</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>這些服務要收費嗎？<span class="faq-toggle">+</span></summary>
+          <p class="faq-answer">目前全部免費使用、不用註冊。未來某些服務可能會有進階付費版本（例如更完整的資料、通知功能、更多城市支援），讓我能持續維護。基本功能會保持免費。</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>有建議、想回饋、或想跟雞蛋糕的媽媽聊聊？<span class="faq-toggle">+</span></summary>
+          <p class="faq-answer">歡迎寫信給我，或在各個服務的 GitHub repo 開 issue。一個人做的小攤，每一個回饋都非常珍貴。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.page -->
+
+<!-- FOOTER -->
 <footer>
-  <span class="tagline">先是做給雞蛋糕，也分享給你的孩子。</span>
-  <span class="meta-line">© <span id="year"></span> Bookworm TW · by Nina Lu · Taipei, Taiwan</span>
+  <div class="page">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Bookworm TW</div>
+        <div class="footer-tagline">先是做給雞蛋糕，也分享給你的孩子。</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-meta">
+          by Nina Lu · Taipei, Taiwan<br>
+          © <span id="year"></span> · 免費使用 · 無需註冊
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<!-- TWEAKS PANEL (design-mode only) -->
+<div id="tweaks-panel" role="complementary" aria-label="Tweaks">
+  <div class="tweaks-title">Tweaks</div>
+  <div class="tweak-row">
+    <label>配色主題</label>
+    <div class="tweak-options">
+      <button class="tweak-btn active" onclick="setTheme('warm',this)">暖金</button>
+      <button class="tweak-btn" onclick="setTheme('sage',this)">茶綠</button>
+      <button class="tweak-btn" onclick="setTheme('slate',this)">深藍</button>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <label>卡片樣式</label>
+    <div class="tweak-options">
+      <button class="tweak-btn active" onclick="setCardStyle('default',this)">標準</button>
+      <button class="tweak-btn" onclick="setCardStyle('compact',this)">緊湊</button>
+      <button class="tweak-btn" onclick="setCardStyle('bordered',this)">線框</button>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <label>字型配置</label>
+    <div class="tweak-options">
+      <button class="tweak-btn active" onclick="setFont('literary',this)">文學體</button>
+      <button class="tweak-btn" onclick="setFont('modern',this)">現代體</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Tweaks
+const TWEAK_DEFAULTS = { theme: 'warm', cardStyle: 'default', font: 'literary' };
+let tweaks = { ...TWEAK_DEFAULTS };
+
+function applyTweaks() {
+  const root = document.documentElement;
+  const themes = {
+    warm:  { gold: '#b8721a', 'gold-lt': '#e8a84a', 'gold-bg': '#f7e8cc', sage: '#5a7a5c' },
+    sage:  { gold: '#4a7a55', 'gold-lt': '#7ab87e', 'gold-bg': '#e0f0e4', sage: '#4a7a55' },
+    slate: { gold: '#3a5a8a', 'gold-lt': '#6a8abb', 'gold-bg': '#dce8f5', sage: '#3a5a8a' },
+  };
+  const t = themes[tweaks.theme] || themes.warm;
+  Object.entries(t).forEach(([k, v]) => root.style.setProperty(`--${k}`, v));
+  document.querySelectorAll('.svc-card').forEach(c => {
+    c.style.minHeight = tweaks.cardStyle === 'compact' ? '140px' : '';
+    c.style.background = tweaks.cardStyle === 'bordered' ? 'transparent' : '';
+  });
+  const fontMap = {
+    literary: "'Playfair Display', 'Noto Serif TC', Georgia, serif",
+    modern:   "'Noto Sans TC', -apple-system, sans-serif",
+  };
+  root.style.setProperty('--serif-en', fontMap[tweaks.font] || fontMap.literary);
+}
+applyTweaks();
+
+function setTheme(theme, btn) {
+  tweaks.theme = theme;
+  btn.closest('.tweak-options').querySelectorAll('.tweak-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyTweaks();
+  window.parent?.postMessage({ type: '__edit_mode_set_keys', edits: tweaks }, '*');
+}
+function setCardStyle(style, btn) {
+  tweaks.cardStyle = style;
+  btn.closest('.tweak-options').querySelectorAll('.tweak-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyTweaks();
+  window.parent?.postMessage({ type: '__edit_mode_set_keys', edits: tweaks }, '*');
+}
+function setFont(font, btn) {
+  tweaks.font = font;
+  btn.closest('.tweak-options').querySelectorAll('.tweak-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyTweaks();
+  window.parent?.postMessage({ type: '__edit_mode_set_keys', edits: tweaks }, '*');
+}
+
+// Design mode bridge
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').classList.add('open');
+  if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('open');
+});
+window.parent?.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
 </body>
 </html>
