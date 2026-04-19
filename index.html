@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bookworm TW｜成語、全台哺乳室地圖、童書共讀、台北文化活動 — 為雞蛋糕做的小工具</title>
-<meta name="description" content="Bookworm TW 收錄五個免費繁體中文小工具：成語介紹與遊戲、全台哺乳室地圖、童書共讀筆記、台北文化活動。由 Nina（PM＋工程師媽媽）為女兒「雞蛋糕」親手做，開放所有家庭使用。">
-<meta name="keywords" content="Bookworm TW, 雞蛋糕, PM, 工程師媽媽, 成語, 成語遊戲, 哺乳室, 全台哺乳室地圖, 童書共讀, 台北文化活動, 親子, 繁體中文, 台灣">
+<meta name="description" content="Bookworm TW 收錄五個免費繁體中文小工具：成語介紹、成語遊戲、全台哺乳室地圖、童書共讀筆記、台北文化活動。由 Nina（PM＋工程師媽媽）為女兒「雞蛋糕」親手做，開放所有家庭使用。">
+<meta name="keywords" content="Bookworm TW, 雞蛋糕, 成語, 成語遊戲, 哺乳室, 全台哺乳室地圖, 童書共讀, 台北文化活動, 親子, 繁體中文, 台灣">
 <meta name="author" content="Nina Lu">
+<meta name="theme-color" content="#fdf6e9">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
 <link rel="canonical" href="https://bookwormtw.com/">
 
@@ -18,8 +19,8 @@
 <meta property="og:locale" content="zh_TW">
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bookworm TW — 為雞蛋糕做的小工具">
-<meta name="twitter:description" content="成語、哺乳室地圖、童書共讀、台北文化活動——媽媽為女兒做的繁體中文小工具。">
+<meta name="twitter:title" content="Bookworm TW｜成語、哺乳室地圖、童書共讀、台北文化活動">
+<meta name="twitter:description" content="五個免費繁體中文小工具，由 PM＋工程師媽媽 Nina 為女兒「雞蛋糕」親手做。">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 
@@ -157,7 +158,7 @@
           "name": "這些服務要收費嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "目前全部免費使用，不用註冊。未來某些服務可能會有進階付費版本（例如更完整的資料、通知功能），讓我能持續維護、把工具做得更好。基本功能會保持免費。"
+            "text": "目前全部免費使用、不用註冊。未來某些服務可能會有進階付費版本（例如更完整的資料、通知功能、更多城市支援），基本功能會保持免費。"
           }
         }
       ]
@@ -167,297 +168,621 @@
 </script>
 
 <style>
+  /* ============ Reset & Base ============ */
   *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; padding: 0; }
+
   :root {
-    --bg: #fdf6e9;
-    --bg-alt: #faeed6;
-    --fg: #3a2c22;
-    --muted: #7a6352;
-    --card: #ffffff;
-    --border: #ecdcc2;
-    --accent: #c47a38;
-    --accent-soft: #fbe9d0;
+    /* Warm, bookish palette — 雞蛋糕 golden */
+    --bg: #fbf4e4;
+    --paper: #fffaf0;
+    --ink: #2a1e14;
+    --ink-soft: #5c4a3a;
+    --ink-faint: #8c7a68;
+    --border: #e8d8ba;
+    --border-soft: #f0e4cc;
+    --gold: #c47a28;
+    --gold-soft: #f5e4c8;
+    --gold-ink: #8a5416;
+    --cream-glow: #faedc8;
+
+    /* Scale */
+    --radius: 14px;
+    --radius-lg: 20px;
+
+    /* Typography */
+    --font-serif: "Iowan Old Style", "Noto Serif TC", "Source Han Serif TC", "Songti TC", Georgia, "PMingLiU", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   }
+
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1e1813;
-      --bg-alt: #2a2119;
-      --fg: #f5ecdf;
-      --muted: #b0a08e;
-      --card: #281f18;
-      --border: #3d2f23;
-      --accent: #e8a368;
-      --accent-soft: #3a2a1d;
+      --bg: #1a1510;
+      --paper: #231c14;
+      --ink: #f5ecdc;
+      --ink-soft: #c4b39b;
+      --ink-faint: #8f7d66;
+      --border: #3a2d1e;
+      --border-soft: #2d2217;
+      --gold: #e8a869;
+      --gold-soft: #3a2a18;
+      --gold-ink: #f2be84;
+      --cream-glow: #2f2415;
     }
   }
-  html, body { margin: 0; padding: 0; }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-family: var(--font-sans);
     background: var(--bg);
-    color: var(--fg);
+    color: var(--ink);
     line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
+
   main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 3.5rem 1.5rem 2rem;
-    flex: 1;
     width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 5.5rem) 1.5rem 3rem;
+    flex: 1;
   }
 
-  /* Hero */
-  .hero { margin-bottom: 3rem; text-align: center; }
-  .hero .avatar {
-    font-size: 3rem;
-    display: inline-block;
-    transform: rotate(-6deg);
-    margin-bottom: 0.5rem;
+  a { color: var(--gold-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--gold); }
+
+  /* ============ Kicker (small caps label) ============ */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .kicker::before {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* ============ Hero ============ */
+  .hero {
+    text-align: center;
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+  .hero .kicker {
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .hero .kicker::after {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
   }
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    margin: 0 0 0.25rem;
-    letter-spacing: -0.01em;
-  }
-  .hero .sub {
-    color: var(--accent);
-    font-size: 1rem;
-    margin: 0 0 1.75rem;
-    letter-spacing: 0.02em;
-  }
-  .note-card {
-    background: var(--card);
-    border: 1.5px dashed var(--border);
-    border-radius: 14px;
-    padding: 1.75rem 1.5rem;
-    text-align: left;
-    max-width: 580px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .note-card::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 20px;
-    background: var(--accent-soft);
-    border-radius: 4px;
-    opacity: 0.8;
-  }
-  .note-card p {
-    margin: 0 0 0.9rem;
-    color: var(--fg);
-  }
-  .note-card p:last-of-type { margin-bottom: 0; }
-  .note-card .signoff {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-top: 1.2rem;
-    font-style: italic;
-  }
-  .note-card strong.name {
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .pricing-note {
-    display: inline-block;
-    margin-top: 1.3rem;
-    padding: 0.35rem 0.9rem;
-    background: var(--accent-soft);
-    color: var(--accent);
-    border-radius: 999px;
-    font-size: 0.82rem;
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 8vw, 4.5rem);
     font-weight: 500;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .hero .underline {
+    display: block;
+    margin: 0 auto 1.5rem;
+    color: var(--gold);
+    opacity: 0.75;
+  }
+  .hero .keywords {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin: 0 0 1rem;
+  }
+  .hero .lede {
+    max-width: 32em;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-size: 1rem;
   }
 
-  /* Services */
-  section { margin-bottom: 3rem; }
-  h2.section-title {
+  /* ============ Letter ============ */
+  .letter {
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+  .letter-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    position: relative;
+    box-shadow:
+      0 1px 0 var(--border-soft),
+      0 20px 40px -28px rgba(90, 60, 20, 0.18);
+  }
+  .letter-card::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 68px;
+    height: 22px;
+    background: var(--gold-soft);
+    border-radius: 4px;
+    opacity: 0.95;
+  }
+  .letter-card h2 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin: 0 0 1rem;
+    color: var(--ink);
+  }
+  .letter-card p {
+    margin: 0 0 0.85rem;
+    color: var(--ink);
     font-size: 1rem;
+  }
+  .letter-card p:last-of-type { margin-bottom: 0; }
+  .letter-card .name {
     font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    margin: 0 0 0.4rem;
-    text-align: center;
+    color: var(--gold-ink);
+    background: linear-gradient(180deg, transparent 62%, var(--cream-glow) 62%);
+    padding: 0 2px;
   }
-  .section-sub {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.82rem;
-    margin: 0 0 1.5rem;
-    letter-spacing: 0.02em;
+  .letter-card .signoff {
+    margin-top: 1.25rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    font-size: 0.92rem;
+    font-family: var(--font-serif);
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
+  .pricing-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    padding: 0.4rem 0.9rem;
+    background: var(--gold-soft);
+    color: var(--gold-ink);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .pricing-tag::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ============ Ornament divider ============ */
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: clamp(3rem, 6vw, 4.5rem) 0;
+    color: var(--ink-faint);
+    font-family: var(--font-serif);
+  }
+  .ornament::before, .ornament::after {
+    content: "";
+    flex: 0 1 60px;
+    height: 1px;
+    background: var(--border);
+  }
+  .ornament span {
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ============ Section head ============ */
+  .section-head {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .section-head .kicker {
+    justify-content: center;
+    margin-bottom: 0.9rem;
+  }
+  .section-head .kicker::after {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-head h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.65rem, 4vw, 2.1rem);
+    font-weight: 500;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .section-head .section-desc {
+    max-width: 30em;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  /* ============ Services ============ */
+  .services-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    gap: 1rem;
   }
-  .card {
-    display: block;
-    padding: 1.5rem 1.5rem 1.4rem;
-    background: var(--card);
+  .service {
+    background: var(--paper);
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-radius: var(--radius);
+    padding: 1.75rem 1.75rem 1.5rem;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    gap: 0 1.25rem;
+    align-items: start;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    position: relative;
   }
-  .card:hover, .card:focus-visible {
-    transform: translateY(-3px);
-    border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(196, 122, 56, 0.12);
+  .service:hover, .service:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px -14px rgba(196, 122, 40, 0.25);
+    background: var(--paper);
     outline: none;
   }
-  .card .emoji {
-    font-size: 2rem;
-    line-height: 1;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-  .card h3 {
-    font-size: 1.15rem;
-    margin: 0 0 0.5rem;
-    font-weight: 600;
-  }
-  .card .what {
-    color: var(--fg);
-    margin: 0 0 0.4rem;
-    font-size: 0.95rem;
-    line-height: 1.55;
+  .service .num {
+    grid-row: 1 / 4;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--gold);
     font-weight: 500;
+    letter-spacing: 0.05em;
+    padding-top: 0.3rem;
+    min-width: 2.2rem;
+    border-right: 1px solid var(--border-soft);
+    padding-right: 1rem;
+    text-align: center;
   }
-  .card .why {
-    color: var(--muted);
+  .service .head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .service h3 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 500;
     margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.6;
-    font-style: italic;
+    color: var(--ink);
   }
-  .card .host {
-    display: block;
-    margin-top: 0.85rem;
-    color: var(--accent);
-    font-size: 0.8rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  .service .emoji {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+  .service .what {
+    margin: 0 0 0.35rem;
+    color: var(--ink);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+  .service .why {
+    margin: 0;
+    color: var(--ink-faint);
+    font-size: 0.88rem;
+    font-style: italic;
+    font-family: var(--font-serif);
+    line-height: 1.6;
+  }
+  .service .meta {
+    grid-column: 2 / 3;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--gold-ink);
+    letter-spacing: -0.01em;
+  }
+  .service .arrow {
+    grid-row: 1 / 4;
+    align-self: center;
+    color: var(--ink-faint);
+    font-size: 1.4rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+    line-height: 1;
+  }
+  .service:hover .arrow, .service:focus-visible .arrow {
+    transform: translateX(4px);
+    color: var(--gold);
   }
 
-  /* FAQ */
+  @media (max-width: 540px) {
+    .service {
+      grid-template-columns: auto 1fr;
+      gap: 0.3rem 1rem;
+    }
+    .service .num {
+      grid-row: 1 / 2;
+      border-right: none;
+      padding: 0;
+      text-align: left;
+      font-size: 1rem;
+      min-width: 0;
+      color: var(--gold);
+    }
+    .service .arrow {
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+      justify-self: end;
+    }
+    .service .head, .service .what, .service .why, .service .meta {
+      grid-column: 1 / 3;
+    }
+  }
+
+  /* ============ About strip ============ */
+  .about {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding: 2rem;
+    background: var(--gold-soft);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .about h2 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 0.75rem;
+    color: var(--gold-ink);
+  }
+  .about p {
+    margin: 0 auto;
+    max-width: 36em;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  /* ============ FAQ ============ */
+  .faq {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
   .faq details {
     border-top: 1px solid var(--border);
-    padding: 1.1rem 0;
+    padding: 1.2rem 0.25rem;
+    transition: background 0.15s ease;
   }
-  .faq details:last-child { border-bottom: 1px solid var(--border); }
+  .faq details:last-of-type {
+    border-bottom: 1px solid var(--border);
+  }
+  .faq details[open] {
+    background: linear-gradient(180deg, transparent, var(--border-soft) 120%);
+  }
   .faq summary {
     cursor: pointer;
-    font-weight: 500;
     list-style: none;
-    color: var(--fg);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--ink);
   }
   .faq summary::-webkit-details-marker { display: none; }
   .faq summary::before {
-    content: "+ ";
-    color: var(--accent);
+    content: "+";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--gold-soft);
+    color: var(--gold-ink);
+    font-size: 0.9rem;
     font-weight: 600;
+    transition: transform 0.2s ease, background 0.2s ease;
   }
-  .faq details[open] summary::before { content: "− "; }
+  .faq details[open] summary::before {
+    content: "−";
+    background: var(--gold);
+    color: white;
+  }
   .faq p {
-    color: var(--muted);
-    margin: 0.75rem 0 0;
+    margin: 0.9rem 0 0.25rem 2.1rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.7;
   }
 
+  /* ============ Footer ============ */
   footer {
     text-align: center;
-    padding: 2.5rem 1rem 3rem;
-    color: var(--muted);
+    padding: 3rem 1.5rem 2.5rem;
+    color: var(--ink-faint);
     font-size: 0.85rem;
-    line-height: 1.7;
+    line-height: 1.8;
+    border-top: 1px solid var(--border-soft);
+    margin-top: 3rem;
   }
   footer .tagline {
     display: block;
-    margin-bottom: 0.3rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+  footer .meta-line {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+
+  /* ============ Accessibility ============ */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>
 </head>
 <body>
-<main>
-  <header class="hero">
-    <div class="avatar" aria-hidden="true">📚</div>
-    <h1>Bookworm TW</h1>
-    <p class="sub">— 為雞蛋糕做的小工具 —</p>
 
-    <div class="note-card">
-      <p>你好，我是 Nina 👋</p>
-      <p>我女兒小名叫 <strong class="name">雞蛋糕</strong>。我是一個 PM，也是工程師。</p>
-      <p>這裡的每一個小工具，幾乎都是我在養育雞蛋糕的路上，一個一個為她做的——想讓她讀成語時覺得有趣、想陪她讀繪本、想在帶她出門時找得到哺乳室、想在週末帶她看看台北。</p>
-      <p>做著做著發現，可能別的爸媽、別的孩子也會用得上，所以放在這裡公開分享。希望也能陪到你的孩子。</p>
-      <p class="signoff">— Nina, 在 product spec 與親子繪本之間</p>
-      <span class="pricing-note">目前免費使用 · 未來可能有付費進階版</span>
-    </div>
+<main>
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <p class="kicker">by Nina · for 雞蛋糕</p>
+    <h1>Bookworm TW</h1>
+    <svg class="underline" width="220" height="10" viewBox="0 0 220 10" fill="none" aria-hidden="true">
+      <path d="M3 6 C 50 2, 110 9, 160 4 S 210 7, 217 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    <p class="keywords">成語 · 哺乳室 · 童書共讀 · 台北文化</p>
+    <p class="lede">一位 PM 工程師媽媽，為女兒「雞蛋糕」親手做的五個免費繁體中文小工具。做著做著，也分享給你的孩子。</p>
   </header>
 
-  <section aria-labelledby="services-title">
-    <h2 id="services-title" class="section-title">為雞蛋糕做的五個小工具</h2>
-    <p class="section-sub">成語介紹 · 成語遊戲 · 全台哺乳室地圖 · 童書共讀筆記 · 台北文化活動</p>
-    <ul class="grid">
-      <li>
-        <a class="card" href="https://idiom.bookwormtw.com/">
-          <span class="emoji" aria-hidden="true">🀄</span>
-          <h3>成語介紹</h3>
-          <p class="what">查詢繁體中文成語的典故、釋義與用法。</p>
-          <p class="why">希望雞蛋糕以後讀成語時，不會覺得字典太硬。</p>
-          <span class="host">idiom.bookwormtw.com</span>
-        </a>
-      </li>
-      <li>
-        <a class="card" href="https://idiom-game.bookwormtw.com/">
-          <span class="emoji" aria-hidden="true">🎮</span>
-          <h3>成語遊戲</h3>
-          <p class="what">以遊戲形式練習與學習繁體中文成語，適合兒童與親子共玩。</p>
-          <p class="why">把成語做成遊戲，讓雞蛋糕邊玩邊記。</p>
-          <span class="host">idiom-game.bookwormtw.com</span>
-        </a>
-      </li>
-      <li>
-        <a class="card" href="https://milkmap.bookwormtw.com/">
-          <span class="emoji" aria-hidden="true">🍼</span>
-          <h3>全台哺乳室地圖</h3>
-          <p class="what">查找全台各地哺乳室地點、開放時間與設施資訊，涵蓋百貨、車站、景點與公共場所。</p>
-          <p class="why">親餵雞蛋糕的日子，常找不到能坐下來的地方。</p>
-          <span class="host">milkmap.bookwormtw.com</span>
-        </a>
-      </li>
-      <li>
-        <a class="card" href="https://kidsbook.pages.dev/">
-          <span class="emoji" aria-hidden="true">📖</span>
-          <h3>童書共讀筆記</h3>
-          <p class="what">記錄親子共讀童書的心得、重點、親子對話與延伸討論。</p>
-          <p class="why">跟雞蛋糕一起讀過的每一本書，想好好記下來。</p>
-          <span class="host">kidsbook.pages.dev</span>
-        </a>
-      </li>
-      <li>
-        <a class="card" href="https://taipei-culture.bookwormtw.com/">
-          <span class="emoji" aria-hidden="true">🎨</span>
-          <h3>台北文化活動</h3>
-          <p class="what">彙整台北各類藝文展覽、表演、市集與親子活動，方便家庭規劃週末行程。</p>
-          <p class="why">想帶雞蛋糕週末看看世界。</p>
-          <span class="host">taipei-culture.bookwormtw.com</span>
-        </a>
-      </li>
-    </ul>
+  <!-- ============ LETTER ============ -->
+  <section class="letter" aria-label="關於作者與這個網站">
+    <article class="letter-card">
+      <h2>一封關於這個小站的信</h2>
+      <p>你好，我是 Nina。</p>
+      <p>我女兒小名叫 <span class="name">雞蛋糕</span>。我是一個 PM，也是工程師。</p>
+      <p>這裡的每一個小工具，幾乎都是我在養育雞蛋糕的路上，為她一個一個親手做的——想讓她讀成語時覺得有趣、陪她讀繪本、出門時找得到哺乳室、週末帶她看看台北。</p>
+      <p>做著做著，發現別的爸媽與孩子可能也會用得上，所以放在這裡分享。希望也能陪到你的孩子。</p>
+      <p class="signoff">— Nina, 在 product spec 與親子繪本之間</p>
+      <span class="pricing-tag">目前免費使用 · 未來可能有付費進階版</span>
+    </article>
   </section>
 
-  <section class="faq" aria-labelledby="faq-title">
-    <h2 id="faq-title" class="section-title">常被問的幾件事</h2>
+  <!-- Ornament -->
+  <div class="ornament" aria-hidden="true"><span>· · ·</span></div>
+
+  <!-- ============ SERVICES ============ -->
+  <section aria-labelledby="services-h">
+    <div class="section-head">
+      <p class="kicker">Tools · 小工具</p>
+      <h2 id="services-h">為雞蛋糕做的五個小工具</h2>
+      <p class="section-desc">成語介紹、成語遊戲、全台哺乳室地圖、童書共讀筆記、台北文化活動——免費使用、無需註冊。</p>
+    </div>
+
+    <ol class="services-list">
+      <li>
+        <a class="service" href="https://idiom.bookwormtw.com/">
+          <span class="num" aria-hidden="true">01</span>
+          <div class="head">
+            <span class="emoji" aria-hidden="true">🀄</span>
+            <h3>成語介紹</h3>
+          </div>
+          <p class="what">查詢繁體中文成語的典故、釋義與用法。</p>
+          <p class="why">希望雞蛋糕以後讀成語時，不會覺得字典太硬。</p>
+          <span class="meta">idiom.bookwormtw.com</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="service" href="https://idiom-game.bookwormtw.com/">
+          <span class="num" aria-hidden="true">02</span>
+          <div class="head">
+            <span class="emoji" aria-hidden="true">🎮</span>
+            <h3>成語遊戲</h3>
+          </div>
+          <p class="what">以遊戲形式練習與學習成語，適合兒童與親子共玩。</p>
+          <p class="why">把成語做成遊戲，讓雞蛋糕邊玩邊記。</p>
+          <span class="meta">idiom-game.bookwormtw.com</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="service" href="https://milkmap.bookwormtw.com/">
+          <span class="num" aria-hidden="true">03</span>
+          <div class="head">
+            <span class="emoji" aria-hidden="true">🍼</span>
+            <h3>全台哺乳室地圖</h3>
+          </div>
+          <p class="what">查找全台哺乳室地點、開放時間與設施資訊，涵蓋百貨、車站、景點與公共場所。</p>
+          <p class="why">親餵雞蛋糕的日子，常找不到能坐下來的地方。</p>
+          <span class="meta">milkmap.bookwormtw.com</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="service" href="https://kidsbook.pages.dev/">
+          <span class="num" aria-hidden="true">04</span>
+          <div class="head">
+            <span class="emoji" aria-hidden="true">📖</span>
+            <h3>童書共讀筆記</h3>
+          </div>
+          <p class="what">記錄親子共讀童書的心得、重點、對話與延伸討論。</p>
+          <p class="why">跟雞蛋糕一起讀過的每一本書，想好好記下來。</p>
+          <span class="meta">kidsbook.pages.dev</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="service" href="https://taipei-culture.bookwormtw.com/">
+          <span class="num" aria-hidden="true">05</span>
+          <div class="head">
+            <span class="emoji" aria-hidden="true">🎨</span>
+            <h3>台北文化活動</h3>
+          </div>
+          <p class="what">彙整台北各類藝文展覽、表演、市集與親子活動，方便家庭規劃週末行程。</p>
+          <p class="why">想帶雞蛋糕週末看看世界。</p>
+          <span class="meta">taipei-culture.bookwormtw.com</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <aside class="about" aria-labelledby="about-h">
+    <h2 id="about-h">關於 Nina</h2>
+    <p>一個 PM（Product Manager）與工程師，同時是雞蛋糕的媽媽。喜歡把生活裡遇到的小麻煩，親手做成小工具，並開放給其他家庭使用。Bookworm TW 是這些工具的集散地。</p>
+  </aside>
+
+  <!-- Ornament -->
+  <div class="ornament" aria-hidden="true"><span>· · ·</span></div>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq" aria-labelledby="faq-h">
+    <div class="section-head">
+      <p class="kicker">FAQ · 常問的幾件事</p>
+      <h2 id="faq-h">如果你想問……</h2>
+    </div>
     <details>
       <summary>「雞蛋糕」是誰？</summary>
       <p>是我女兒的小名。圓圓的、暖暖的、很可愛，所以叫雞蛋糕 🫶 這個網站上的大部分工具，都是在養育她的路上，一個一個為她做的。</p>
@@ -479,7 +804,7 @@
 
 <footer>
   <span class="tagline">先是做給雞蛋糕，也分享給你的孩子。</span>
-  © <span id="year"></span> Bookworm TW · by Nina Lu
+  <span class="meta-line">© <span id="year"></span> Bookworm TW · by Nina Lu · Taipei, Taiwan</span>
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
