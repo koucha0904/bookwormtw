@@ -9,7 +9,7 @@
 - [成語介紹](https://idiom.bookwormtw.com/)
 - [成語遊戲](https://idiom-game.bookwormtw.com/)
 - [全台哺乳室地圖](https://milkmap.bookwormtw.com/)
-- [童書共讀筆記](https://kidsbook.pages.dev/)
+- [童書共讀筆記](https://kidsbooks.bookwormtw.com/)
 - [台北文化活動](https://taipei-culture.bookwormtw.com/)
 
 ## Stack
