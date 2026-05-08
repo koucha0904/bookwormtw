@@ -12,6 +12,8 @@
 
 - [成語介紹](https://idiom.bookwormtw.com/): 把成語典故寫得像故事，希望孩子讀成語時不會覺得硬。
 - [成語遊戲](https://idiom-game.bookwormtw.com/): 把成語做成遊戲，讓孩子邊玩邊記。
+- [打字冒險遊戲](https://typegame.bookwormtw.com/): 中英文打字練習遊戲，以冒險地圖串關，提供英文路線與注音中文路線。
+- [兒童學習單](https://worksheet.bookwormtw.com/zh/): 免費繁體中文兒童學習單下載，適合學齡前與國小兒童，持續新增中。
 - [全台哺乳室地圖](https://milkmap.bookwormtw.com/): 親餵時找不到哺乳室的困擾，做成這張全台地圖。
 - [童書共讀筆記](https://kidsbooks.bookwormtw.com/): 紀錄與孩子共讀童書的心得、重點與親子對話。
 - [台北文化活動](https://taipei-culture.bookwormtw.com/): 整理台北的藝文展演、親子活動與文化展覽資訊。
@@ -22,6 +24,7 @@
 - 語言: 繁體中文 (zh-Hant-TW)
 - 服務地區: 台灣（部分服務聚焦台北）
 - 根網域: https://bookwormtw.com/
+- 服務數量: 7 個（全部免費）
 - 定位: 個人作品集散地，非商業平台
 
 ## Pricing

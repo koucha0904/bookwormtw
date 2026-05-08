@@ -8,6 +8,8 @@
 
 - [成語介紹](https://idiom.bookwormtw.com/)
 - [成語遊戲](https://idiom-game.bookwormtw.com/)
+- [打字冒險遊戲](https://typegame.bookwormtw.com/)
+- [兒童學習單](https://worksheet.bookwormtw.com/zh/)
 - [全台哺乳室地圖](https://milkmap.bookwormtw.com/)
 - [童書共讀筆記](https://kidsbooks.bookwormtw.com/)
 - [台北文化活動](https://taipei-culture.bookwormtw.com/)
